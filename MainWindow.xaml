@@ -1,0 +1,84 @@
+﻿<Window x:Class="P2PFileSharingApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="P2P File Sharing" Height="500" Width="900"
+        WindowStartupLocation="CenterScreen"
+        Background="#1E1E2F">
+    <Window.Resources>
+        <!-- Global Styles -->
+        <Style TargetType="TextBox">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="8"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#2C2C3C"/>
+            <Setter Property="BorderBrush" Value="#3A3A5A"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="8,5"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Background" Value="#3A82F6"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="8" Color="Black" Opacity="0.4"/>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#2563EB"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="ListView">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#2C2C3C"/>
+            <Setter Property="BorderBrush" Value="#3A3A5A"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <!-- Header -->
+        <TextBlock Text="P2P File Sharing Application" Foreground="White" FontSize="24"
+                   FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0"/>
+
+        <!-- Peer Connection Section -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,50,0,0">
+            <TextBox x:Name="IpTextBox" Width="250" Height="40" Tag="Enter Peer IP" />
+            <TextBox x:Name="PortTextBox" Width="150" Height="40" Tag="Enter Port" />
+            <Button x:Name="ConnectButton" Content="Connect" Width="120" Height="40" Click="ConnectButton_Click"/>
+            <Button x:Name="RefreshButton" Content="Refresh" Width="120" Height="40" Click="RefreshButton_Click"/>
+        </StackPanel>
+
+        <!-- Assigned Port -->
+        <TextBox x:Name="AssignedPortTextBox" Width="250" Height="40" Margin="0,110,0,0"
+                 HorizontalAlignment="Center" VerticalAlignment="Top" IsReadOnly="True"
+                 Tag="Assigned Port"/>
+
+        <!-- File List Display -->
+        <ListView x:Name="FileListView" Margin="20,180,20,100" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="File Name" DisplayMemberBinding="{Binding FileName}" Width="500"/>
+                    <GridViewColumn Header="Size" DisplayMemberBinding="{Binding FileSize}" Width="100"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <!-- Action Buttons -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,20">
+            <Button x:Name="UploadButton" Content="Upload File" Width="150" Height="40" Click="UploadButton_Click"/>
+            <Button x:Name="DeleteButton" Content="Delete File" Width="150" Height="40" Click="DeleteButton_Click"/>
+            <Button x:Name="DownloadButton" Content="Download File" Width="150" Height="40" Click="DownloadButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
